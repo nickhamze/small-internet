@@ -1,6 +1,6 @@
 ---
 title: Pocket field guide
-description: A small notebook structure for paying closer attention on an ordinary walk.
+description: A little field guide for noticing ordinary things.
 date: 2026-10-05
 category: On paper
 featured: true

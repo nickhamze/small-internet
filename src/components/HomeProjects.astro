@@ -1,6 +1,5 @@
 ---
 import type { CollectionEntry } from 'astro:content';
-import ProjectDoodle from './ProjectDoodle.astro';
 interface Props {
   projects: CollectionEntry<'projects'>[];
 }
@@ -15,17 +14,82 @@ const { projects } = Astro.props;
   {projects.length ? (
     <div class="cards">
       {projects.map((project, i) => (
-        <article class="card">
-          <ProjectDoodle kind={i === 0 ? 'notebook' : 'books'} />
-          <div>
-            <h3>{project.data.title}</h3>
-            <p>{project.data.description}</p>
-            <a
-              href={`/projects/${project.id}/`}
-              aria-label={`View project: ${project.data.title}`}
-            >
-              View project →
-            </a>
+        <article
+          class:list={[
+            'card',
+            'project-panel',
+            i === 0 ? 'project-featured' : 'project-secondary',
+          ]}
+        >
+          <p class="project-title">
+            {i === 0 ? 'Featured project' : project.data.title}
+          </p>
+          {i === 0 && (
+            <div class="project-spread">
+              <img
+                class="project-spread-art"
+                src="/assets/project-spread.webp"
+                width="960"
+                height="640"
+                alt=""
+                loading="lazy"
+              />
+              <div class="spread-cover">
+                <strong>{project.data.title}</strong>
+                <span>Small things for a kinder internet</span>
+              </div>
+              <div class="project-copy">
+                <h3>{project.data.title}</h3>
+                <p>{project.data.description}</p>
+                <a
+                  href={`/projects/${project.id}/`}
+                  aria-label={`View project: ${project.data.title}`}
+                >
+                  View project →
+                </a>
+              </div>
+            </div>
+          )}
+          <div class="project-regular">
+            {i === 0 ? (
+              <>
+                <img
+                  class="project-art project-art-personal"
+                  src="/assets/project-cover.webp"
+                  width="480"
+                  height="545"
+                  alt=""
+                  loading="lazy"
+                />
+                <img
+                  class="project-art project-art-garden"
+                  src="/assets/project-spread.webp"
+                  width="960"
+                  height="640"
+                  alt=""
+                  loading="lazy"
+                />
+              </>
+            ) : (
+              <img
+                class="project-art"
+                src="/assets/project-books.webp"
+                width="640"
+                height="427"
+                alt=""
+                loading="lazy"
+              />
+            )}
+            <div class="project-copy">
+              <h3>{project.data.title}</h3>
+              <p>{project.data.description}</p>
+              <a
+                href={`/projects/${project.id}/`}
+                aria-label={`View project: ${project.data.title}`}
+              >
+                View project →
+              </a>
+            </div>
           </div>
         </article>
       ))}

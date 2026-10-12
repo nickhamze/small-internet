@@ -7,16 +7,19 @@ import { now } from '../data/now';
   <h2>
     <span class="personal-heading">Now</span>
     <span class="notebook-heading">Useful right now</span>
-    <span class="garden-heading">Brain fertilizer</span>
+    <span class="garden-heading">Now reading / building / listening</span>
   </h2>
-  {now.map((item, i) => (
-    <div class="now-item">
-      <Icon kind={['book', 'tool', 'music'][i]} />
-      <div>
-        <strong>{item.label}</strong>
-        {item.title}
+  <div class="now-items">
+    {now.map((item, i) => (
+      <div class="now-item">
+        <Icon kind={['book', 'tool', 'music'][i]} />
+        <div>
+          <strong>{item.label}</strong>
+          <span class="now-title">{item.title}</span>
+          <span class="now-description">{item.description}</span>
+        </div>
       </div>
-    </div>
-  ))}
+    ))}
+  </div>
   <a href="/now/">See my now page →</a>
 </aside>

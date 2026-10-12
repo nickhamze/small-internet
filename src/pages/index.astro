@@ -30,16 +30,23 @@ const projects = [
   <section class="hero">
     <div class="hero-copy">
       <div class="greeting-paper">
-        <p class="eyebrow">A small corner of a very big web</p>
-        <h1>
-          HELLO,
-          <br />
-          INTERNET!
+        <h1 aria-label="Hello, Internet!">
+          {['HELLO,', 'INTERNET!'].map((word) => (
+            <span class="greeting-line" aria-hidden="true">
+              {[...word].map((letter) => (
+                <span>{letter}</span>
+              ))}
+            </span>
+          ))}
         </h1>
         <p class="lede">
           I’m {site.owner}. {site.intro}
         </p>
       </div>
+      <a class="garden-invitation" href="/garden/">
+        A messy garden of links for brighter days{' '}
+        <span aria-hidden="true">→</span>
+      </a>
       <p class="margin-note">
         No feeds. Just stuff.{' '}
         <svg

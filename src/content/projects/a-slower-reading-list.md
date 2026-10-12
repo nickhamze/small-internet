@@ -1,6 +1,6 @@
 ---
 title: A slower reading list
-description: A reading list organized around reasons to return, with room to stop, wander, and reread.
+description: Books worth taking your time with.
 date: 2026-09-30
 category: Reading
 featured: true

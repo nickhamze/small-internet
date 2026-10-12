@@ -18,55 +18,6 @@ const throwingStorage = {
     throw new Error('blocked');
   },
 };
-const callbacks = {};
-let focused = false;
-const button = {
-  classList: { add() {} },
-  addEventListener: (event, fn) => (callbacks[event] = fn),
-};
-const root = {
-  dataset: {},
-  style: { setProperty: (key, value) => (root[key] = value) },
-};
-const banner = {
-  dataset: { storageKey: 'synthetic:spacefast-dismissed' },
-  hidden: false,
-  getBoundingClientRect: () => ({ height: 61 }),
-  querySelector: () => button,
-};
-let editing = false;
-const visualViewport = {
-  height: 844,
-  addEventListener: (event, fn) => (callbacks['viewport-' + event] = fn),
-};
-const document = {
-  documentElement: root,
-  activeElement: { matches: () => editing },
-  querySelector: (selector) =>
-    selector === '#hosting-banner' ? banner : { focus: () => (focused = true) },
-  addEventListener: (event, fn) => (callbacks[event] = fn),
-};
-vm.runInNewContext(script('src/components/HostingBanner.astro'), {
-  document,
-  window: { visualViewport, innerHeight: 844 },
-  ResizeObserver: class {
-    observe() {}
-  },
-  localStorage: throwingStorage,
-});
-assert.equal(root['--host-height'], '61px');
-editing = true;
-visualViewport.height = 300;
-callbacks['viewport-resize']();
-assert.equal(banner.hidden, true);
-assert.equal(root['--host-height'], '0px');
-editing = false;
-callbacks.focusout();
-assert.equal(banner.hidden, false);
-callbacks.click();
-assert.equal(banner.hidden, true);
-assert.equal(root['--host-height'], '0px');
-assert.equal(focused, true);
 const name = { value: 'Synthetic name', focus() {} },
   message = { value: 'Synthetic private draft' },
   status = { textContent: '' };
@@ -98,5 +49,5 @@ clearEvents.click();
 assert.match(status.textContent, /unchanged/);
 assert.equal(message.value, 'Synthetic private draft');
 console.log(
-  'PASS: blocked-storage close and focus recovery; keyboard-viewport hide/restore; draft failure preserves text and truthful status. Code-level simulation, not hardware keyboard verification.',
+  'PASS: browser storage failure preserves the private draft and reports truthful save/clear status. Code-level privacy simulation.',
 );

@@ -16,7 +16,6 @@ const format = (date: Date) =>
 <section class="home-notes paper-panel">
   <div class="section-heading">
     <h2>Latest notes</h2>
-    <a href="/notes/">More notes →</a>
   </div>
   {notes.length ? (
     <ul class="notes-list">
@@ -37,4 +36,7 @@ const format = (date: Date) =>
       The notebook is empty for now. There’s room for the next small thought.
     </p>
   )}
+  <a class="section-more" href="/notes/">
+    More notes →
+  </a>
 </section>

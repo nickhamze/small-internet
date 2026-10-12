@@ -1,11 +1,15 @@
 ---
 import { garden } from '../data/garden';
 import ExternalTitle from './ExternalTitle.astro';
+import Icon from './Icon.astro';
 ---
 
 <section class="home-garden paper-panel">
   <div class="section-heading">
-    <h2>Link garden</h2>
+    <h2>
+      <span class="personal-heading notebook-heading">Link garden</span>
+      <span class="garden-heading">Garden first</span>
+    </h2>
     <a href="/garden/">All the links →</a>
   </div>
   <p class="section-aside">
@@ -21,9 +25,16 @@ import ExternalTitle from './ExternalTitle.astro';
           <a href={link.href}>
             <ExternalTitle title={link.title} />
           </a>
+          <span class="garden-category">{link.category}</span>
           <p>{link.description}</p>
+          <a class="garden-visit" href={link.href}>
+            Visit {link.title} <span aria-hidden="true">↗</span>
+          </a>
         </div>
         <span class="tag">{link.category}</span>
+        <span class="garden-leaf-corner" aria-hidden="true">
+          <Icon kind="leaf" />
+        </span>
       </li>
     ))}
   </ul>

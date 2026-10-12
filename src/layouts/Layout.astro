@@ -1,9 +1,8 @@
 ---
 import { site } from '../data/site';
-import HostingBanner from '../components/HostingBanner.astro';
-import '@fontsource/lilita-one/latin-400.css';
-import '@fontsource/kalam/latin-400.css';
-import '@fontsource/kalam/latin-700.css';
+import Icon from '../components/Icon.astro';
+import '@fontsource/chewy/latin-400.css';
+import '@fontsource/patrick-hand/latin-400.css';
 import '@fontsource-variable/dm-sans';
 import '../styles/global.css';
 interface Props {
@@ -87,8 +86,6 @@ const navigation = [
         const look = localStorage.getItem(storageId + ':look');
         if (['personal', 'notebook', 'garden'].includes(look))
           document.documentElement.dataset.look = look;
-        if (localStorage.getItem(storageId + ':spacefast-dismissed') === '1')
-          document.documentElement.dataset.hostDismissed = 'true';
       } catch {}
     </script>
   </head>
@@ -144,33 +141,38 @@ const navigation = [
             </a>
           ))}
         </nav>
-      </header>
-      <div
-        class="look-controls js-only"
-        role="group"
-        aria-label="Choose a look"
-      >
-        <span class="look-label">Change the furniture:</span>
-        <div>
-          {[
-            ['personal', 'Personal'],
-            ['notebook', 'Notebook'],
-            ['garden', 'Garden'],
-          ].map(([value, label]) => (
-            <button
-              class="chip"
-              data-look-button={value}
-              aria-pressed={site.defaultLook === value}
-            >
-              {label}
-            </button>
-          ))}
+        <div
+          class="look-controls js-only"
+          role="group"
+          aria-label="Choose a look"
+        >
+          <span class="look-label">Look:</span>
+          <div>
+            {[
+              ['personal', 'Personal'],
+              ['notebook', 'Notebook'],
+              ['garden', 'Garden'],
+            ].map(([value, label]) => (
+              <button
+                class="chip"
+                data-look-button={value}
+                aria-pressed={site.defaultLook === value}
+              >
+                {label}
+              </button>
+            ))}
+          </div>
         </div>
-      </div>
+      </header>
       <main id="main" tabindex="-1">
         <slot />
       </main>
       <footer class="site-footer">
+        <span class="garden-flora" aria-hidden="true">
+          <Icon kind="leaf" />
+          <Icon kind="leaf" />
+          <Icon kind="leaf" />
+        </span>
         <p>{site.footer}</p>
         <div>
           <a href="/garden/">Link garden</a>
@@ -178,21 +180,8 @@ const navigation = [
           <a href="/rss.xml">RSS</a>
           <a href="/theme/">About this theme</a>
         </div>
-        <a class="theme-credit" href="https://spacefast.com/">
-          <span>A free Astro theme</span>
-          <img
-            src="/assets/spacefast-wordmark.svg"
-            width="152"
-            height="29"
-            alt="Spacefast"
-          />
-          <span class="credit-domain">
-            spacefast.com <span aria-hidden="true">↗</span>
-          </span>
-        </a>
       </footer>
     </div>
-    <HostingBanner />
     <script>
       const buttons =
         document.querySelectorAll<HTMLButtonElement>('[data-look-button]');

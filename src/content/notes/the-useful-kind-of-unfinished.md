@@ -1,6 +1,6 @@
 ---
 title: The useful kind of unfinished
-description: Give a small project a clear edge, a working middle, and an honest account of what comes next.
+description: Notes, drafts, half-ideas — they are worth keeping.
 date: 2026-10-03
 category: Making
 featured: true

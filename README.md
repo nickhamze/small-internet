@@ -2,21 +2,19 @@
 
 ![Small Internet’s lavender personal homepage with a coffee-drinking computer](preview.png)
 
-[Try the live demo](https://small-internet.space.fast/) · [Use this GitHub template](https://github.com/nickhamze/small-internet/generate)
-
-A free Astro theme for a personal corner of the web: notes, projects, favorite things, and good links. Big comic headings, handwritten details, and a friendly CRT character keep it a little odd. Your writing stays in Markdown; the finished website is static HTML.
+An editable Astro theme for a personal corner of the web: notes, projects, favorite things, and good links. Big comic headings, handwritten details, and a friendly CRT character keep it a little odd. Your writing stays in Markdown; the finished website is static HTML. Small Internet is intended for paid distribution under the MIT license.
 
 Three looks are included, with distinct compositions and artwork:
 
-| Look | What it feels like | Homepage starts with |
+| Look | What it feels like | Homepage composition |
 | --- | --- | --- |
-| **Personal** | Lavender noticeboard, pinned paper, and a CRT companion | Notes |
-| **Notebook** | Yellow graph paper, binding, and project folders | Projects |
-| **Garden** | Mint paper, growing things, and a plant-and-CRT companion | Links |
+| **Personal** | Lavender noticeboard, pinned paper, and a coffee-drinking CRT companion | Three desktop columns for notes, current activities, and links |
+| **Notebook** | Yellow graph paper, binding, and an open-notebook companion | A featured project spread, supporting projects, and notes |
+| **Garden** | Mint paper, growing things, and a plant-and-CRT companion | Link beds with a horizontal current-activities strip |
 
-Lilita One supplies the comic headings, Kalam the handwritten accents, and DM Sans the readable desktop and phone body text. All fonts are served locally. Transparent comic artwork and responsive variants are included.
+Chewy supplies the comic headings, Patrick Hand the handwritten accents, and DM Sans the readable desktop and phone body text. All fonts are served locally. The character illustrations and project spread/books artwork follow the theme's mockup references; transparent character variants are included for smaller screens.
 
-The theme includes Markdown archives and detail pages, category filters, a now page, RSS, generated social artwork and favicon, an intentional 404, and a curated guestbook with private browser drafts. It uses Astro 7.3.8 and needs no CMS account or server runtime. Robin and the starter writing are sample content for you to replace.
+The theme includes Markdown archives and detail pages, category filters, a now page, RSS, generated social artwork and favicon, an intentional 404, and a curated guestbook with private browser drafts. It uses standard Astro 7.3.8 source, components, and Content Layer collections. There is no proprietary runtime, CMS account, or hosting-provider integration. Robin and the starter writing are sample content for you to replace.
 
 ## Start locally
 
@@ -27,27 +25,26 @@ npm ci
 npm run dev
 ```
 
-Open the local address printed by Astro. No hosting banner or public indexing is enabled by default.
+Open the local address printed by Astro. Public indexing is disabled by default.
 
 | Command | Purpose |
 | --- | --- |
 | `npm run dev` | Work on the site locally |
-| `npm run demo` | Preview the optional banner labeled **Hosting preview** |
 | `npm run build` | Generate the static site in `dist/` |
 | `npm run preview` | Serve the production build locally |
 | `npm run check` | Check types and content |
 | `npm run format` | Format editable source |
 | `npm run verify` | Run the complete local verification sequence |
 
-Dev, demo, and build automatically regenerate your favicon and social image from the configured identity and default look. You can also run `npm run assets` directly.
+Dev and build automatically regenerate your favicon and social image from the configured identity and default look. You can also run `npm run assets` directly.
 
-`npm run verify` runs type checks, formatting checks, a production build, static output checks, behavior simulations, official-brand checks, and isolated authoring fixtures.
+`npm run verify` runs type checks, formatting checks, a production build, static output checks, privacy/behavior checks, and isolated authoring fixtures.
 
 Run `node scripts/verify-behavior.mjs` for code-level simulations of blocked browser storage and keyboard-driven viewport changes. These cover failure branches; they are not a physical keyboard or device test. Inspect the actual site on your target screens as well.
 
 ## Make it yours
 
-Start in `src/data/site.ts`: change the site name, owner, intro, tagline, description, footer, current activity, and initial look. `defaultLook` accepts `personal`, `notebook`, or `garden` and sets the initial homepage composition. Visitors can choose a look themselves. Give `storageId` a unique value for your site before launch, then keep it stable on routine updates so visitors retain their look, banner dismissal, and private local guestbook drafts.
+Start in `src/data/site.ts`: change the site name, owner, intro, tagline, description, footer, current activity, and initial look. `defaultLook` accepts `personal`, `notebook`, or `garden` and sets the initial homepage composition. Visitors can choose a look themselves. Give `storageId` a unique value for your site before launch, then keep it stable on routine updates so visitors retain their look and private local guestbook drafts.
 
 | File or folder | What to edit |
 | --- | --- |
@@ -96,26 +93,18 @@ SITE_URL=https://your-real-owner-origin PUBLIC_INDEXING=1 node scripts/verify-st
 
 The origin above is a placeholder. Use your verified origin without a path, query, credentials, or fragment. Without these settings the site builds with noindex metadata, blocked robots, and an empty sitemap. These crawl controls are not access controls; never put secrets or private records in published static files. Enabling crawlability does not establish indexing or guarantee search/AI recommendations. Check the final host, metadata, social image, links, and crawler responses after publication.
 
-Every look includes the official [Spacefast](https://spacefast.com/) wordmark in the permanent maker footer. That credit travels with the theme and does not claim your site is hosted there.
+## Standard static hosting
 
-The optional hosting banner is off by default. Set `SPACEFAST_HOSTED=1` only for a site actually hosted on Spacefast. The fixed banner is dismissible and releases its reserved space immediately; keep its namespaced dismissal key stable. `npm run demo` enables the explicitly labeled hosting preview locally.
-
-## Optional Spacefast setup
-
-The [official Astro hosting recipe](https://spacefast.com/docs/recipes/astro/) describes static output publishing. Once you've reviewed your build and chosen to publish, inspect the plan first:
-
-```sh
-sf publish ./dist --prebuilt --dry-run
-```
-
-Then, if the plan matches your intended destination, `sf publish ./dist --prebuilt` uploads the build. Publishing can create or update an external Space; running this theme locally never does that. No account or deployment binding is included. Configure the correct owner origin and hosting flag for the actual build, then check the hosted pages and crawler responses.
+Run `npm run build`, then upload the generated `dist/` directory to any static host that serves your domain root. Configure the owner origin before building as shown above. No provider CLI, account binding, or proprietary runtime is required by the theme. Host-specific deployment settings belong to the host you choose; verify its final pages and crawler responses after uploading.
 
 ## Editable source package
 
-`node scripts/package.mjs` stages a clean editable copy in `output/clean-source/`. After reviewing the source you intend to share, `node scripts/package.mjs --zip` creates `output/small-internet-1.0.0.zip`. This requires a system `zip` utility. The allowlist includes source, public assets, lockfile, config, license notices, the asset/package/demo/verification scripts, formatter settings, and CI workflow. It excludes dependencies, builds, environment files, deployment state, internal reports, mockups, screenshots, history, and local visitor data.
+`node scripts/package.mjs` stages a clean editable copy in `output/clean-source/`. After reviewing the source you intend to share, `node scripts/package.mjs --zip` creates `output/small-internet-1.1.0.zip`. This requires a system `zip` utility. The allowlist includes source, public assets, lockfile, config, license notices, the asset/package/verification scripts, formatter settings, and CI workflow. It excludes dependencies, builds, environment files, deployment state, internal reports, mockups, screenshots, history, and local visitor data.
 
 The package includes your content files and curated guestbook source. Review those before redistribution; the packaging script cannot decide whether your edits contain personal information. Verify your customized copy with the included commands and inspect the production build on your target screens.
 
 ## License
 
-The [MIT license](LICENSE) covers theme code, starter writing, and generated comic artwork. Fonts retain their SIL Open Font License terms, and the official Spacefast wordmark remains a separate trademark asset. See [third-party notices](THIRD-PARTY-NOTICES.md) and the included `licenses/` files.
+Theme code, starter writing, and generated comic artwork are covered by the [MIT license](LICENSE). Paid distribution does not change those terms: MIT permits use, modification, redistribution, and sale subject to preserving its copyright and permission notice. The previously public 1.0 release retains the same license.
+
+Generated comic artwork is identified in [third-party notices](THIRD-PARTY-NOTICES.md). Chewy retains its Apache License 2.0 terms; Patrick Hand and DM Sans retain their SIL Open Font License terms. Preserve the included font licenses when redistributing them.

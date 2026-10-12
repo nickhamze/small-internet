@@ -1,6 +1,6 @@
 ---
 title: Taking the long way home
-description: 'A walk without an errand can still have a useful shape: notice, pause, and bring one question back.'
+description: A walk, some thoughts, and a slower way home.
 date: 2026-09-24
 category: Everyday
 featured: false

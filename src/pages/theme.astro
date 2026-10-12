@@ -4,15 +4,14 @@ import Layout from '../layouts/Layout.astro';
 
 <Layout
   title="About Small Internet"
-  description="A free, portable Astro theme with three complete looks, editable Markdown, RSS, and optional Spacefast hosting."
+  description="A standalone Astro theme with three hand-drawn looks, editable Markdown, and RSS."
 >
   <article class="article">
-    <p class="eyebrow">Your own place on the internet</p>
     <header>
       <h1>A weird little home on the web.</h1>
       <p class="lede">
-        Small Internet is a free Astro theme for the things you make, notice,
-        and want to keep.
+        Small Internet is an Astro theme for the things you make, notice, and
+        want to keep.
       </p>
     </header>
     <div class="prose">
@@ -25,9 +24,9 @@ import Layout from '../layouts/Layout.astro';
       <p>
         <strong>Personal Homepage</strong> pairs lavender paper with a
         coffee-drinking computer. <strong>Maker’s Notebook</strong> puts your
-        projects on a yellow graph-paper desk with a very opinionated folder.
+        projects on a yellow graph-paper desk with a very opinionated folder.{' '}
         <strong>Link Garden</strong> grows mint-green link beds beside a plant
-        computer and a skeptical snail. Try the buttons above; your choice stays
+        computer and a skeptical snail. Try the look buttons; your choice stays
         on this device.
       </p>
       <h2>Made to be yours</h2>
@@ -43,54 +42,23 @@ import Layout from '../layouts/Layout.astro';
       </p>
       <h2>Get started</h2>
       <p>
-        <a href="https://github.com/nickhamze/small-internet">
-          Get Small Internet on GitHub ↗
-        </a>
-      </p>
-      <p>
-        Open the downloaded project in your editor. With Node 22.12 or newer,
-        install the locked dependencies and start the local preview:
+        Open the theme in your editor. With Node 22.12 or newer, install the
+        locked dependencies and start the local preview:
       </p>
       <pre><code>npm ci
 npm run dev</code></pre>
       <p>
         Change your identity in <code>src/data/site.ts</code>, write in{' '}
         <code>src/content/</code>, and build with <code>npm run build</code>.
-        The finished static site is in <code>dist/</code>. The included README
-        covers the details.
+        The finished static site is in <code>dist/</code>. Deploy that folder to
+        your chosen static host. The included README covers setup and
+        customization.
       </p>
-      <div class="theme-callout">
-        <h2>Make yours with Spacefast</h2>
-        <p>
-          Spacefast is an optional host for your Astro site. You can also take
-          this theme to another static host.
-        </p>
-        <p>
-          Spacefast’s supported path is to build your site and publish the
-          output with its CLI:
-        </p>
-        <pre><code>npm run build
-sf publish ./dist --prebuilt --dry-run
-sf publish ./dist --prebuilt</code></pre>
-        <p>
-          Review the target before publishing. The publish command creates or
-          updates a hosted site; it is not a local preview. Turn on the
-          Spacefast hosting credit only when your site is actually hosted there.
-        </p>
-        <p>
-          <a href="https://spacefast.com/docs/recipes/astro/">
-            Read Spacefast’s Astro setup guide ↗
-          </a>{' '}
-          · <a href="https://spacefast.com/">Explore Spacefast ↗</a>
-        </p>
-      </div>
-      <h2>Free to keep, free to change</h2>
+      <h2>Your copy, your corner</h2>
       <p>
-        Small Internet’s code and starting content are available under the MIT
-        license. The bundled fonts use their SIL Open Font Licenses. Spacefast’s
-        wordmark belongs to Spacefast. The footer links to the theme’s maker;
-        the optional hosting banner credits Spacefast only on sites actually
-        hosted there.
+        The theme’s code, starter writing, and artwork use the MIT license.
+        Bundled fonts retain their individual licenses, included with the theme.
+        No account or hosting service is required to run the project.
       </p>
     </div>
     <p class="article-end">

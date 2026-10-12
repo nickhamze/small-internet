@@ -1,11 +1,14 @@
 #!/usr/bin/env node
-import { cp, mkdir, readdir, rm, stat } from 'node:fs/promises';
+import { cp, mkdir, readdir, rm, stat, readFile } from 'node:fs/promises';
 import { dirname, resolve, join, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { execFileSync } from 'node:child_process';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const stage = join(root, 'output/clean-source');
+const { version } = JSON.parse(
+  await readFile(join(root, 'package.json'), 'utf8'),
+);
 const allow = [
   'src',
   'public',
@@ -26,14 +29,13 @@ const allow = [
   'scripts/verify-static.mjs',
   'scripts/verify-behavior.mjs',
   'scripts/verify-authoring.mjs',
-  'scripts/verify-brand.mjs',
-  'scripts/demo.mjs',
+  'scripts/verify-portable.mjs',
   '.prettierrc.mjs',
   '.prettierignore',
   '.github/workflows/ci.yml',
 ];
 const forbidden =
-  /^(?:node_modules|dist|\.astro|\.spacefast|design|screens|history|output)$|^\.env/;
+  /^(?:node_modules|dist|\.astro|design|screens|history|output)$|^\.env/;
 async function copySafe(source, target) {
   const info = await stat(source);
   if (info.isDirectory()) {
@@ -53,7 +55,7 @@ for (const path of allow) await copySafe(join(root, path), join(stage, path));
 console.log(`Clean source staged: ${relative(root, stage)}`);
 if (process.argv.includes('--zip')) {
   // Run only after completing and recording the independent final review.
-  const zip = join(root, 'output/small-internet-1.0.0.zip');
+  const zip = join(root, `output/small-internet-${version}.zip`);
   await rm(zip, { force: true });
   execFileSync('zip', ['-q', '-r', zip, '.'], { cwd: stage });
   console.log(`ZIP created: ${relative(root, zip)}`);

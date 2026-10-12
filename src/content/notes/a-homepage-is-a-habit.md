@@ -1,6 +1,6 @@
 ---
 title: A homepage is a habit
-description: A small routine for keeping a personal website useful, even when there is nothing big to announce.
+description: Small updates make a homepage worth returning to.
 date: 2026-10-08
 category: Internet
 featured: true

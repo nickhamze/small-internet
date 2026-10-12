@@ -2,20 +2,17 @@ export const now = [
   {
     label: 'Reading',
     title: 'Braiding Sweetgrass',
-    description:
-      'One essay at a time, with a notebook nearby for questions I want to carry outside.',
+    description: 'One essay at a time.',
   },
   {
     label: 'Building',
     title: 'A simpler notes system',
-    description:
-      'A place for scraps, a place for things worth keeping, and fewer decisions between the two.',
+    description: 'Fewer tools. More writing.',
   },
   {
     label: 'Listening',
     title: 'Adrianne Lenker',
-    description:
-      'Letting a whole record play while I sort the small projects on my desk.',
+    description: 'Songs for quiet days.',
   },
 ];
 export const updated = '2026-10-08';
