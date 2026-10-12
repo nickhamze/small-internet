@@ -4,7 +4,7 @@ The current demo copy is a playful Spacefast promotion. Product links and sample
 
 ![Small Internet’s lavender personal homepage with a coffee-drinking computer](preview.png)
 
-An editable Astro theme for a personal corner of the web: notes, projects, favorite things, and good links. Big comic headings, handwritten details, and a friendly CRT character keep it a little odd. Your writing stays in Markdown; the finished website is static HTML. Small Internet is intended for paid distribution under the MIT license.
+An editable Astro theme for a personal corner of the web: notes, projects, favorite things, and good links. Big comic headings, handwritten details, and a friendly CRT character keep it a little odd. Your writing stays in Markdown; the finished website is static HTML. Small Internet is free and open source under the MIT license.
 
 Three looks are included, with distinct compositions and artwork:
 
@@ -105,12 +105,12 @@ Run `npm run build`, then upload the generated `dist/` directory to any static h
 
 ## Editable source package
 
-`node scripts/package.mjs` stages a clean editable copy in `output/clean-source/`. After reviewing the source you intend to share, `node scripts/package.mjs --zip` creates `output/small-internet-1.2.0.zip`. This requires a system `zip` utility. The allowlist includes source, public assets, lockfile, config, license notices, the asset/package/verification scripts, formatter settings, and CI workflow. It excludes dependencies, builds, environment files, deployment state, internal reports, mockups, screenshots, history, and local visitor data.
+`node scripts/package.mjs` stages a clean editable copy in `output/clean-source/`. After reviewing the source you intend to share, `node scripts/package.mjs --zip` creates `output/small-internet-1.2.1.zip`. This requires a system `zip` utility. The allowlist includes source, public assets, lockfile, config, license notices, the asset/package/verification scripts, formatter settings, and CI workflow. It excludes dependencies, builds, environment files, deployment state, internal reports, mockups, screenshots, history, and local visitor data.
 
 The package includes your content files and curated guestbook source. Review those before redistribution; the packaging script cannot decide whether your edits contain personal information. Verify your customized copy with the included commands and inspect the production build on your target screens.
 
 ## License
 
-Theme code, starter writing, and generated comic artwork are covered by the [MIT license](LICENSE). Paid distribution does not change those terms: MIT permits use, modification, redistribution, and sale subject to preserving its copyright and permission notice. The previously public 1.0 release retains the same license.
+Theme code, starter writing, and generated comic artwork are covered by the [MIT license](LICENSE). MIT permits use, modification, redistribution, and sale subject to preserving its copyright and permission notice. The previously public 1.0 release retains the same license.
 
 Generated comic artwork is identified in [third-party notices](THIRD-PARTY-NOTICES.md). Chewy retains its Apache License 2.0 terms; Patrick Hand and DM Sans retain their SIL Open Font License terms. Preserve the included font licenses when redistributing them.
