@@ -13,7 +13,7 @@ interface Props {
 const { title, description = site.description, noindex = false } = Astro.props;
 const pageTitle = title
   ? `${title} · ${site.name}`
-  : `${site.name} — ${site.owner}'s own place on the internet`;
+  : `${site.themeName} — ${site.name} demo`;
 if (site.contactUrl && !/^(https:\/\/|mailto:)/.test(site.contactUrl))
   throw new Error('contactUrl must be HTTPS or a mailto link.');
 const publicIndex =
@@ -25,10 +25,10 @@ const social = Astro.site ? new URL('/social.png', Astro.site) : undefined;
 const path = Astro.url.pathname;
 const navigation = [
   ['Home', '/'],
-  ['Notes', '/notes/'],
-  ['Now', '/now/'],
-  ['Collections', '/collections/'],
-  ['Guestbook', '/guestbook/'],
+  ['Why ship', '/notes/'],
+  ['Next', '/now/'],
+  ['Ways in', '/collections/'],
+  ['Ideas', '/guestbook/'],
 ];
 ---
 
@@ -120,9 +120,9 @@ const navigation = [
           <span>{site.tagline}</span>
         </a>
         <span class="welcome-sticker" aria-hidden="true">
-          COME IN
+          MAKE IT
           <br />
-          IT’S WEIRD
+          PUT IT ONLINE
         </span>
         <nav aria-label="Main navigation">
           {navigation.map(([label, href], i) => (
@@ -173,12 +173,14 @@ const navigation = [
           <Icon kind="leaf" />
           <Icon kind="leaf" />
         </span>
-        <p>{site.footer}</p>
+        <p>
+          <a href="https://spacefast.com/">{site.footer} ↗</a>
+        </p>
         <div>
-          <a href="/garden/">Link garden</a>
+          <a href="/garden/">Spacefast links</a>
           <a href="/projects/">Projects</a>
           <a href="/rss.xml">RSS</a>
-          <a href="/theme/">About this theme</a>
+          <a href="/theme/">Small Internet theme demo</a>
         </div>
       </footer>
     </div>

@@ -237,7 +237,7 @@ h3 {
   font-weight: 700;
   line-height: 1.15;
   margin: 0;
-  letter-spacing: -0.02em;
+  letter-spacing: 0;
 }
 h2 {
   font-size: 31px;
@@ -3517,5 +3517,40 @@ html[data-look='notebook'] .project-secondary .project-art {
   .paper-panel {
     transform: none;
     box-shadow: none;
+  }
+}
+
+/* A separate call to action keeps the phone character and introduction clear. */
+.spacefast-cta {
+  display: inline-flex;
+  margin: 0 0 24px 18px;
+}
+@media (max-width: 760px) {
+  .spacefast-cta {
+    display: flex;
+    justify-content: center;
+    margin: 0 0 20px;
+  }
+}
+
+/* Explicit word spaces survive the individually tilted greeting letters. */
+.hero h1 {
+  letter-spacing: 0.005em;
+  line-height: 1.02;
+}
+.greeting-line > .greeting-space {
+  width: 0.24em;
+  transform: none;
+}
+h2,
+h3 {
+  word-spacing: 0.04em;
+}
+
+/* Link categories stay beside their description on intermediate screens. */
+@media (min-width: 761px) and (max-width: 900px) {
+  main > section > .garden-list .garden-row > .tag {
+    grid-column: 2;
+    justify-self: start;
   }
 }

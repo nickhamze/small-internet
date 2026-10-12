@@ -7,14 +7,12 @@ import Icon from './Icon.astro';
 <section class="home-garden paper-panel">
   <div class="section-heading">
     <h2>
-      <span class="personal-heading notebook-heading">Link garden</span>
-      <span class="garden-heading">Garden first</span>
+      <span class="personal-heading notebook-heading">Go Spacefast</span>
+      <span class="garden-heading">Plant it online</span>
     </h2>
-    <a href="/garden/">All the links →</a>
+    <a href="/garden/">Find your way →</a>
   </div>
-  <p class="section-aside">
-    Good places for curious people. Please don’t eat the links.
-  </p>
+  <p class="section-aside">Your next good click. The computer insists.</p>
   <ul class="garden-list">
     {garden.slice(0, 3).map((link, i) => (
       <li class="garden-row">
@@ -28,7 +26,7 @@ import Icon from './Icon.astro';
           <span class="garden-category">{link.category}</span>
           <p>{link.description}</p>
           <a class="garden-visit" href={link.href}>
-            Visit {link.title} <span aria-hidden="true">↗</span>
+            Go there <span aria-hidden="true">↗</span>
           </a>
         </div>
         <span class="tag">{link.category}</span>

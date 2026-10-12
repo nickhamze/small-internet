@@ -6,11 +6,11 @@ import { now, updated } from '../data/now';
 
 <Layout
   title="Now"
-  description="What I am reading, making, and listening to lately."
+  description="Make something with your agent, publish it with Spacefast, and keep improving it."
 >
   <header class="page-heading">
-    <p class="eyebrow">A snapshot of lately</p>
-    <h1>What’s on my mind.</h1>
+    <p class="eyebrow">Your next three moves</p>
+    <h1>Make. Ship. Tinker.</h1>
     <p>
       Updated{' '}
       <time datetime={updated}>
@@ -21,7 +21,7 @@ import { now, updated } from '../data/now';
           timeZone: 'UTC',
         })}
       </time>
-      . A now page is a little window into the ordinary.
+      . A good idea deserves a place outside the chat.
     </p>
   </header>
   <div class="now-layout">
@@ -38,12 +38,14 @@ import { now, updated } from '../data/now';
       ))}
     </section>
     <aside class="aside-box">
-      <h2>Elsewhere here</h2>
-      <a href="/notes/">Recent notes →</a>
-      <a href="/projects/">On the workbench →</a>
-      <a href="/collections/">Things I’m keeping →</a>
-      <a href="/garden/">A garden of links →</a>
-      <p>Some things change quickly. Good pages make room for that.</p>
+      <h2>Keep going</h2>
+      <a href="/notes/">Reasons to ship →</a>
+      <a href="/projects/">Ideas to make →</a>
+      <a href="/collections/">Ways to publish →</a>
+      <a href="/garden/">Spacefast links →</a>
+      <p>
+        Spacefast keeps the same link when you republish. Keep the ideas coming.
+      </p>
     </aside>
   </div>
 </Layout>

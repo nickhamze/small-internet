@@ -9,12 +9,15 @@ const projects = (await getCollection('projects', (e) => !e.data.draft)).sort(
 
 <Layout
   title="Projects"
-  description="Projects, experiments, and things made with care."
+  description="Ideas for websites and useful little apps to publish with Spacefast."
 >
   <header class="page-heading">
-    <p class="eyebrow">On the workbench</p>
-    <h1>Things from the workbench.</h1>
-    <p>Projects and experiments worth sharing.</p>
+    <p class="eyebrow">What will you make?</p>
+    <h1>Your next internet thing.</h1>
+    <p>
+      A tiny guide. A useful list. Something gloriously specific. Make it, then
+      give it a home.
+    </p>
   </header>
   {projects.length ? (
     <div class="project-grid">

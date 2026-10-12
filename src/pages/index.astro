@@ -30,40 +30,29 @@ const projects = [
   <section class="hero">
     <div class="hero-copy">
       <div class="greeting-paper">
-        <h1 aria-label="Hello, Internet!">
-          {['HELLO,', 'INTERNET!'].map((word) => (
+        <h1 aria-label="Ship it, already!">
+          {['SHIP IT,', 'ALREADY!'].map((word) => (
             <span class="greeting-line" aria-hidden="true">
               {[...word].map((letter) => (
-                <span>{letter}</span>
+                <span class:list={{ 'greeting-space': letter === ' ' }}>
+                  {letter === ' ' ? '\u00a0' : letter}
+                </span>
               ))}
             </span>
           ))}
         </h1>
-        <p class="lede">
-          I’m {site.owner}. {site.intro}
-        </p>
+        <p class="lede">{site.intro}</p>
       </div>
-      <a class="garden-invitation" href="/garden/">
-        A messy garden of links for brighter days{' '}
-        <span aria-hidden="true">→</span>
+      <a class="garden-invitation" href="https://spacefast.com/">
+        Give your next idea a home <span aria-hidden="true">→</span>
       </a>
-      <p class="margin-note">
-        No feeds. Just stuff.{' '}
-        <svg
-          width="54"
-          height="30"
-          viewBox="0 0 54 30"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2.5"
-          aria-hidden="true"
-        >
-          <path d="M3 5C28-5 45 10 46 23M35 20l11 5 5-13" />
-        </svg>
-      </p>
+      <p class="margin-note">Made it? Ship it.</p>
     </div>
     <Oddball />
   </section>
+  <a class="button spacefast-cta" href="https://spacefast.com/">
+    Meet Spacefast ↗
+  </a>
   <p class="current-strip">
     <span>Currently:</span> {site.currently}. <span aria-hidden="true">♡</span>
   </p>

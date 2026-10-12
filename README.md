@@ -1,5 +1,7 @@
 # Small Internet
 
+The current demo copy is a playful Spacefast promotion. Product links and sample articles are editable; the theme remains standalone Astro with no Spacefast runtime dependency.
+
 ![Small Internet’s lavender personal homepage with a coffee-drinking computer](preview.png)
 
 An editable Astro theme for a personal corner of the web: notes, projects, favorite things, and good links. Big comic headings, handwritten details, and a friendly CRT character keep it a little odd. Your writing stays in Markdown; the finished website is static HTML. Small Internet is intended for paid distribution under the MIT license.
@@ -8,13 +10,17 @@ Three looks are included, with distinct compositions and artwork:
 
 | Look | What it feels like | Homepage composition |
 | --- | --- | --- |
-| **Personal** | Lavender noticeboard, pinned paper, and a coffee-drinking CRT companion | Three desktop columns for notes, current activities, and links |
+| **Personal** | Lavender noticeboard, pinned paper, and a coffee-drinking CRT companion | Three desktop columns for notes, current activities, and projects |
 | **Notebook** | Yellow graph paper, binding, and an open-notebook companion | A featured project spread, supporting projects, and notes |
 | **Garden** | Mint paper, growing things, and a plant-and-CRT companion | Link beds with a horizontal current-activities strip |
 
 Chewy supplies the comic headings, Patrick Hand the handwritten accents, and DM Sans the readable desktop and phone body text. All fonts are served locally. The character illustrations and project spread/books artwork follow the theme's mockup references; transparent character variants are included for smaller screens.
 
-The theme includes Markdown archives and detail pages, category filters, a now page, RSS, generated social artwork and favicon, an intentional 404, and a curated guestbook with private browser drafts. It uses standard Astro 7.3.8 source, components, and Content Layer collections. There is no proprietary runtime, CMS account, or hosting-provider integration. Robin and the starter writing are sample content for you to replace.
+The theme includes Markdown archives and detail pages, category filters, a now page, RSS, generated social artwork and favicon, an intentional 404, and a curated guestbook with private browser drafts. It uses standard Astro 7.3.8 source, components, and Content Layer collections. There is no proprietary runtime, CMS account, or hosting-provider integration. Spacefast and the promotional writing are sample content for you to replace. Edit page labels and the hero in `src/pages/` and `src/layouts/Layout.astro` as well as the data files; no Spacefast account is required.
+
+Public source: https://github.com/nickhamze/small-internet
+
+Theme demo: https://small-internet.space.fast/
 
 ## Start locally
 
@@ -99,7 +105,7 @@ Run `npm run build`, then upload the generated `dist/` directory to any static h
 
 ## Editable source package
 
-`node scripts/package.mjs` stages a clean editable copy in `output/clean-source/`. After reviewing the source you intend to share, `node scripts/package.mjs --zip` creates `output/small-internet-1.1.0.zip`. This requires a system `zip` utility. The allowlist includes source, public assets, lockfile, config, license notices, the asset/package/verification scripts, formatter settings, and CI workflow. It excludes dependencies, builds, environment files, deployment state, internal reports, mockups, screenshots, history, and local visitor data.
+`node scripts/package.mjs` stages a clean editable copy in `output/clean-source/`. After reviewing the source you intend to share, `node scripts/package.mjs --zip` creates `output/small-internet-1.2.0.zip`. This requires a system `zip` utility. The allowlist includes source, public assets, lockfile, config, license notices, the asset/package/verification scripts, formatter settings, and CI workflow. It excludes dependencies, builds, environment files, deployment state, internal reports, mockups, screenshots, history, and local visitor data.
 
 The package includes your content files and curated guestbook source. Review those before redistribution; the packaging script cannot decide whether your edits contain personal information. Verify your customized copy with the included commands and inspect the production build on your target screens.
 

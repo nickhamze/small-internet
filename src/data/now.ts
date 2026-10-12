@@ -1,18 +1,18 @@
 export const now = [
   {
-    label: 'Reading',
-    title: 'Braiding Sweetgrass',
-    description: 'One essay at a time.',
+    label: 'Make',
+    title: 'A wonderfully weird site',
+    description: 'Let your agent build it.',
   },
   {
-    label: 'Building',
-    title: 'A simpler notes system',
-    description: 'Fewer tools. More writing.',
+    label: 'Publish',
+    title: 'A home on Spacefast',
+    description: 'Ask your agent to ship it.',
   },
   {
-    label: 'Listening',
-    title: 'Adrianne Lenker',
-    description: 'Songs for quiet days.',
+    label: 'Repeat',
+    title: 'Same link. New ideas.',
+    description: 'Republish as it grows.',
   },
 ];
-export const updated = '2026-10-08';
+export const updated = '2026-10-12';

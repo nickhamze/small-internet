@@ -6,24 +6,25 @@ import { entries } from '../data/guestbook';
 ---
 
 <Layout
-  title="Guestbook"
-  description="A quiet place for kind notes, with a private draft you can save on your own device."
+  title="Idea scratchpad"
+  description="Catch an idea for your next Spacefast project in a private, device-only draft."
 >
   <header class="page-heading">
-    <p class="eyebrow">Say something kind anyway</p>
-    <h1>Leave a little trace.</h1>
+    <p class="eyebrow">What would you make?</p>
+    <h1>Catch the next idea.</h1>
     <p>
-      A place for kind notes. Messages here are published by the site owner.
+      Sketch an idea for your next Spacefast project. This is a private
+      scratchpad, not a message to Spacefast.
     </p>
   </header>
   <form
     class="postcard js-only"
     data-draft-key={`${site.storageId}:guestbook-draft`}
   >
-    <p class="eyebrow">A postcard to keep for now</p>
+    <p class="eyebrow">Your next Spacefast idea</p>
     <label for="draft-name">Name</label>
     <input id="draft-name" maxlength="80" autocomplete="nickname" required />
-    <label for="draft-message">Message</label>
+    <label for="draft-message">Your idea</label>
     <textarea id="draft-message" maxlength="2000" required></textarea>
     <div class="form-actions">
       <button type="submit" class="button">
@@ -59,8 +60,11 @@ import { entries } from '../data/guestbook';
   ) : (
     <section class="empty-state">
       <Icon kind="leaf" />
-      <h2>The guestbook is open to possibilities.</h2>
-      <p>No published messages yet. A little quiet is welcome here, too.</p>
+      <h2>The next idea is yours.</h2>
+      <p>
+        A game for your friends? A page for your club? A very serious website
+        about your cat?
+      </p>
     </section>
   )}
 </Layout>

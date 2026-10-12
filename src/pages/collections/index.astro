@@ -10,12 +10,15 @@ const categories = [...new Set(items.map((n) => n.data.category))];
 
 <Layout
   title="Collections"
-  description="An annotated shelf of books, tools, and everyday things worth keeping."
+  description="Ways to publish your next project with Spacefast."
 >
   <header class="page-heading">
-    <p class="eyebrow">A shelf, not a feed</p>
-    <h1>A few things I’m keeping.</h1>
-    <p>Books, tools, and everyday things with a little staying power.</p>
+    <p class="eyebrow">Pick your way in</p>
+    <h1>Three ways to ship it.</h1>
+    <p>
+      From a conversation, a folder, or a repository. Choose the route that
+      suits you.
+    </p>
   </header>
   {items.length ? (
     <section>

@@ -8,7 +8,7 @@ const { projects } = Astro.props;
 
 <section class="home-projects paper-panel">
   <div class="section-heading">
-    <h2>Selected projects</h2>
+    <h2>What could you ship?</h2>
     <a href="/projects/">View all →</a>
   </div>
   {projects.length ? (
@@ -22,7 +22,7 @@ const { projects } = Astro.props;
           ]}
         >
           <p class="project-title">
-            {i === 0 ? 'Featured project' : project.data.title}
+            {i === 0 ? 'Your next thing' : project.data.title}
           </p>
           {i === 0 && (
             <div class="project-spread">
@@ -36,7 +36,7 @@ const { projects } = Astro.props;
               />
               <div class="spread-cover">
                 <strong>{project.data.title}</strong>
-                <span>Small things for a kinder internet</span>
+                <span>Small ideas deserve real links</span>
               </div>
               <div class="project-copy">
                 <h3>{project.data.title}</h3>
@@ -45,7 +45,7 @@ const { projects } = Astro.props;
                   href={`/projects/${project.id}/`}
                   aria-label={`View project: ${project.data.title}`}
                 >
-                  View project →
+                  Try this idea →
                 </a>
               </div>
             </div>
@@ -87,7 +87,7 @@ const { projects } = Astro.props;
                 href={`/projects/${project.id}/`}
                 aria-label={`View project: ${project.data.title}`}
               >
-                View project →
+                Try this idea →
               </a>
             </div>
           </div>

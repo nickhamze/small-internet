@@ -11,7 +11,7 @@ for (const path of files(root).filter((f) => f.endsWith('.html'))) {
   const html = readFileSync(path, 'utf8');
   assert.doesNotMatch(
     html,
-    /spacefast|__spacefast|hosting-banner|theme-credit|sf publish|Zero capsule/i,
+    /__spacefast|hosting-banner|theme-credit|sf publish|Zero capsule/i,
     path + ': proprietary platform content',
   );
   assert.match(
@@ -34,5 +34,5 @@ assert.match(
   'Standard static Astro output',
 );
 console.log(
-  `PASS: ${count} native Astro pages without proprietary branding, banners or runtime dependencies.`,
+  `PASS: ${count} native Astro pages with editable promotional copy and no proprietary banners or runtime dependencies.`,
 );
