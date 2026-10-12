@@ -1,0 +1,30 @@
+---
+import { garden } from '../data/garden';
+import ExternalTitle from './ExternalTitle.astro';
+---
+
+<section class="home-garden paper-panel">
+  <div class="section-heading">
+    <h2>Link garden</h2>
+    <a href="/garden/">All the links →</a>
+  </div>
+  <p class="section-aside">
+    Good places for curious people. Please don’t eat the links.
+  </p>
+  <ul class="garden-list">
+    {garden.slice(0, 3).map((link, i) => (
+      <li class="garden-row">
+        <span class={`link-number number-${i}`} aria-hidden="true">
+          {i + 1}
+        </span>
+        <div>
+          <a href={link.href}>
+            <ExternalTitle title={link.title} />
+          </a>
+          <p>{link.description}</p>
+        </div>
+        <span class="tag">{link.category}</span>
+      </li>
+    ))}
+  </ul>
+</section>

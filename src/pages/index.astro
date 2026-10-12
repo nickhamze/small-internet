@@ -1,0 +1,87 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+import HomeNotes from '../components/HomeNotes.astro';
+import HomeNow from '../components/HomeNow.astro';
+import HomeProjects from '../components/HomeProjects.astro';
+import HomeGarden from '../components/HomeGarden.astro';
+import Oddball from '../components/Oddball.astro';
+import { site } from '../data/site';
+const allNotes = (await getCollection('notes', (e) => !e.data.draft)).sort(
+  (a, b) =>
+    b.data.date.getTime() - a.data.date.getTime() || a.id.localeCompare(b.id),
+);
+const featuredNotes = allNotes.filter((e) => e.data.featured);
+const notes = [
+  ...featuredNotes,
+  ...allNotes.filter((e) => !e.data.featured),
+].slice(0, 3);
+const allProjects = (
+  await getCollection('projects', (e) => !e.data.draft)
+).sort((a, b) => a.data.order - b.data.order || a.id.localeCompare(b.id));
+const featuredProjects = allProjects.filter((e) => e.data.featured);
+const projects = [
+  ...featuredProjects,
+  ...allProjects.filter((e) => !e.data.featured),
+].slice(0, 2);
+---
+
+<Layout>
+  <section class="hero">
+    <div class="hero-copy">
+      <div class="greeting-paper">
+        <p class="eyebrow">A small corner of a very big web</p>
+        <h1>
+          HELLO,
+          <br />
+          INTERNET!
+        </h1>
+        <p class="lede">
+          I’m {site.owner}. {site.intro}
+        </p>
+      </div>
+      <p class="margin-note">
+        No feeds. Just stuff.{' '}
+        <svg
+          width="54"
+          height="30"
+          viewBox="0 0 54 30"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.5"
+          aria-hidden="true"
+        >
+          <path d="M3 5C28-5 45 10 46 23M35 20l11 5 5-13" />
+        </svg>
+      </p>
+    </div>
+    <Oddball />
+  </section>
+  <p class="current-strip">
+    <span>Currently:</span> {site.currently}. <span aria-hidden="true">♡</span>
+  </p>
+  <div class="home-content">
+    {site.defaultLook === 'notebook' ? (
+      <>
+        <HomeProjects projects={projects} />
+        <HomeNotes notes={notes} />
+        <HomeNow />
+        <HomeGarden />
+      </>
+    ) : site.defaultLook === 'garden' ? (
+      <>
+        <HomeGarden />
+        <HomeNotes notes={notes} />
+        <HomeProjects projects={projects} />
+        <HomeNow />
+      </>
+    ) : (
+      <>
+        <HomeNotes notes={notes} />
+        <HomeNow />
+        <HomeProjects projects={projects} />
+        <HomeGarden />
+      </>
+    )}
+  </div>
+</Layout>

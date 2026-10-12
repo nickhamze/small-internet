@@ -1,0 +1,238 @@
+---
+import { site } from '../data/site';
+import HostingBanner from '../components/HostingBanner.astro';
+import '@fontsource/lilita-one/latin-400.css';
+import '@fontsource/kalam/latin-400.css';
+import '@fontsource/kalam/latin-700.css';
+import '@fontsource-variable/dm-sans';
+import '../styles/global.css';
+interface Props {
+  title?: string;
+  description?: string;
+  noindex?: boolean;
+}
+const { title, description = site.description, noindex = false } = Astro.props;
+const pageTitle = title
+  ? `${title} · ${site.name}`
+  : `${site.name} — ${site.owner}'s own place on the internet`;
+if (site.contactUrl && !/^(https:\/\/|mailto:)/.test(site.contactUrl))
+  throw new Error('contactUrl must be HTTPS or a mailto link.');
+const publicIndex =
+  process.env.PUBLIC_INDEXING === '1' && !!Astro.site && !noindex;
+const canonical = Astro.site
+  ? new URL(Astro.url.pathname, Astro.site)
+  : undefined;
+const social = Astro.site ? new URL('/social.png', Astro.site) : undefined;
+const path = Astro.url.pathname;
+const navigation = [
+  ['Home', '/'],
+  ['Notes', '/notes/'],
+  ['Now', '/now/'],
+  ['Collections', '/collections/'],
+  ['Guestbook', '/guestbook/'],
+];
+---
+
+<!doctype html>
+<html lang="en" data-look={site.defaultLook} data-storage-id={site.storageId}>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+    <meta
+      name="theme-color"
+      content={
+        { personal: '#cdc3f4', notebook: '#f2f077', garden: '#c3ecd0' }[
+          site.defaultLook
+        ]
+      }
+    />
+    <meta
+      name="robots"
+      content={publicIndex ? 'index, follow' : 'noindex, nofollow'}
+    />
+    {canonical && <link rel="canonical" href={canonical} />}
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    {canonical && <meta property="og:url" content={canonical} />}
+    {social && (
+      <>
+        <meta property="og:image" content={social} />
+        <meta
+          property="og:image:alt"
+          content={`${site.name}: ${site.tagline}`}
+        />
+      </>
+    )}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    {social && <meta name="twitter:image" content={social} />}
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title={`${site.name} notes`}
+      href="/rss.xml"
+    />
+    <script is:inline define:vars={{ storageId: site.storageId }}>
+      document.documentElement.classList.add('has-js');
+      try {
+        const look = localStorage.getItem(storageId + ':look');
+        if (['personal', 'notebook', 'garden'].includes(look))
+          document.documentElement.dataset.look = look;
+        if (localStorage.getItem(storageId + ':spacefast-dismissed') === '1')
+          document.documentElement.dataset.hostDismissed = 'true';
+      } catch {}
+    </script>
+  </head>
+  <body>
+    <a href="#main" class="skip-link">
+      Skip to content
+    </a>
+    <div class="site-shell">
+      <div class="notebook-spine" aria-hidden="true">
+        <span>{site.name}</span>
+        <small>
+          notes
+          <br />
+          links
+          <br />
+          ideas
+          <br />
+          people
+          <br />
+          probably
+          <br />
+          some
+          <br />
+          other
+          <br />
+          stuff
+        </small>
+      </div>
+      <header class="site-header">
+        <a class="masthead" href="/">
+          <strong>{site.name}</strong>
+          <span>{site.tagline}</span>
+        </a>
+        <span class="welcome-sticker" aria-hidden="true">
+          COME IN
+          <br />
+          IT’S WEIRD
+        </span>
+        <nav aria-label="Main navigation">
+          {navigation.map(([label, href], i) => (
+            <a
+              href={href}
+              aria-current={
+                (href === '/' ? path === '/' : path.startsWith(href))
+                  ? 'page'
+                  : undefined
+              }
+            >
+              <span class="nav-number" aria-hidden="true">
+                {i + 1}{' '}
+              </span>
+              {label}
+            </a>
+          ))}
+        </nav>
+      </header>
+      <div
+        class="look-controls js-only"
+        role="group"
+        aria-label="Choose a look"
+      >
+        <span class="look-label">Change the furniture:</span>
+        <div>
+          {[
+            ['personal', 'Personal'],
+            ['notebook', 'Notebook'],
+            ['garden', 'Garden'],
+          ].map(([value, label]) => (
+            <button
+              class="chip"
+              data-look-button={value}
+              aria-pressed={site.defaultLook === value}
+            >
+              {label}
+            </button>
+          ))}
+        </div>
+      </div>
+      <main id="main" tabindex="-1">
+        <slot />
+      </main>
+      <footer class="site-footer">
+        <p>{site.footer}</p>
+        <div>
+          <a href="/garden/">Link garden</a>
+          <a href="/projects/">Projects</a>
+          <a href="/rss.xml">RSS</a>
+          <a href="/theme/">About this theme</a>
+        </div>
+        <a class="theme-credit" href="https://spacefast.com/">
+          <span>A free Astro theme</span>
+          <img
+            src="/assets/spacefast-wordmark.svg"
+            width="152"
+            height="29"
+            alt="Spacefast"
+          />
+          <span class="credit-domain">
+            spacefast.com <span aria-hidden="true">↗</span>
+          </span>
+        </a>
+      </footer>
+    </div>
+    <HostingBanner />
+    <script>
+      const buttons =
+        document.querySelectorAll<HTMLButtonElement>('[data-look-button]');
+      const syncLook = () => {
+        const look = document.documentElement.dataset.look || 'personal';
+        buttons.forEach((button) =>
+          button.setAttribute(
+            'aria-pressed',
+            String(button.dataset.lookButton === look),
+          ),
+        );
+        const home = document.querySelector('.home-content');
+        if (home) {
+          const order =
+            look === 'notebook'
+              ? ['projects', 'notes', 'now', 'garden']
+              : look === 'garden'
+                ? ['garden', 'notes', 'projects', 'now']
+                : ['notes', 'now', 'projects', 'garden'];
+          order.forEach((section) => {
+            const node = home.querySelector(`.home-${section}`);
+            if (node) home.append(node);
+          });
+        }
+      };
+      syncLook();
+      buttons.forEach((button) =>
+        button.addEventListener('click', () => {
+          const look = button.dataset.lookButton!;
+          document.documentElement.dataset.look = look;
+          try {
+            localStorage.setItem(
+              `${document.documentElement.dataset.storageId}:look`,
+              look,
+            );
+          } catch {}
+          syncLook();
+        }),
+      );
+      document.querySelector('.look-controls')?.classList.add('is-ready');
+    </script>
+  </body>
+</html>

@@ -1,0 +1,43 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import Filters from '../../components/Filters.astro';
+const items = (await getCollection('items', (e) => !e.data.draft)).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+const categories = [...new Set(items.map((n) => n.data.category))];
+---
+
+<Layout
+  title="Collections"
+  description="An annotated shelf of books, tools, and everyday things worth keeping."
+>
+  <header class="page-heading">
+    <p class="eyebrow">A shelf, not a feed</p>
+    <h1>A few things I’m keeping.</h1>
+    <p>Books, tools, and everyday things with a little staying power.</p>
+  </header>
+  {items.length ? (
+    <section>
+      <Filters categories={categories} />
+      <div class="collection-grid">
+        {items.map((item, i) => (
+          <article class="collection-card" data-category={item.data.category}>
+            <span class="collection-seal" aria-hidden="true">
+              {String(i + 1).padStart(2, '0')}
+            </span>
+            <p class="eyebrow">{item.data.category}</p>
+            <h2>{item.data.title}</h2>
+            <p>{item.data.description}</p>
+            <a href={`/collections/${item.id}/`}>View item →</a>
+          </article>
+        ))}
+      </div>
+    </section>
+  ) : (
+    <section class="empty-state">
+      <h2>No published collection items yet.</h2>
+      <p>The shelf is empty for now.</p>
+    </section>
+  )}
+</Layout>

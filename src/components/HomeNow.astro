@@ -1,0 +1,22 @@
+---
+import Icon from './Icon.astro';
+import { now } from '../data/now';
+---
+
+<aside class="home-now now-card paper-panel">
+  <h2>
+    <span class="personal-heading">Now</span>
+    <span class="notebook-heading">Useful right now</span>
+    <span class="garden-heading">Brain fertilizer</span>
+  </h2>
+  {now.map((item, i) => (
+    <div class="now-item">
+      <Icon kind={['book', 'tool', 'music'][i]} />
+      <div>
+        <strong>{item.label}</strong>
+        {item.title}
+      </div>
+    </div>
+  ))}
+  <a href="/now/">See my now page →</a>
+</aside>

@@ -1,0 +1,38 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import Icon from '../../components/Icon.astro';
+const projects = (await getCollection('projects', (e) => !e.data.draft)).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+---
+
+<Layout
+  title="Projects"
+  description="Projects, experiments, and things made with care."
+>
+  <header class="page-heading">
+    <p class="eyebrow">On the workbench</p>
+    <h1>Things from the workbench.</h1>
+    <p>Projects and experiments worth sharing.</p>
+  </header>
+  {projects.length ? (
+    <div class="project-grid">
+      {projects.map((p, i) => (
+        <article class="card">
+          <Icon kind={i ? 'leaf' : 'book'} />
+          <div>
+            <h2>{p.data.title}</h2>
+            <p>{p.data.description}</p>
+            <a href={`/projects/${p.id}/`}>View project →</a>
+          </div>
+        </article>
+      ))}
+    </div>
+  ) : (
+    <section class="empty-state">
+      <h2>No published projects yet.</h2>
+      <p>There are no projects to explore here at the moment.</p>
+    </section>
+  )}
+</Layout>

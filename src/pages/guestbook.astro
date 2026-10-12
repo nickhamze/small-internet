@@ -1,0 +1,120 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Icon from '../components/Icon.astro';
+import { site } from '../data/site';
+import { entries } from '../data/guestbook';
+---
+
+<Layout
+  title="Guestbook"
+  description="A quiet place for kind notes, with a private draft you can save on your own device."
+>
+  <header class="page-heading">
+    <p class="eyebrow">Say something kind anyway</p>
+    <h1>Leave a little trace.</h1>
+    <p>
+      A place for kind notes. Messages here are published by the site owner.
+    </p>
+  </header>
+  <form
+    class="postcard js-only"
+    data-draft-key={`${site.storageId}:guestbook-draft`}
+  >
+    <p class="eyebrow">A postcard to keep for now</p>
+    <label for="draft-name">Name</label>
+    <input id="draft-name" maxlength="80" autocomplete="nickname" required />
+    <label for="draft-message">Message</label>
+    <textarea id="draft-message" maxlength="2000" required></textarea>
+    <div class="form-actions">
+      <button type="submit" class="button">
+        Save private draft
+      </button>
+      <button type="button" class="text-button" data-clear-draft>
+        Clear draft
+      </button>
+      {site.contactUrl && <a href={site.contactUrl}>Contact the owner ↗</a>}
+    </div>
+    <p class="draft-status" role="status" aria-live="polite">
+      This draft stays on your device. Saving does not send or publish it.
+    </p>
+  </form>
+  <noscript>
+    <p class="theme-callout">
+      Private drafts need JavaScript. No message has been sent or published.
+    </p>
+  </noscript>
+  {entries.length ? (
+    <section>
+      <h2 class="section-heading">Published notes</h2>
+      <ul class="guest-entries">
+        {entries.map((entry) => (
+          <li class="guest-entry">
+            <h3>{entry.name}</h3>
+            <time datetime={entry.date}>{entry.date}</time>
+            <p>{entry.message}</p>
+          </li>
+        ))}
+      </ul>
+    </section>
+  ) : (
+    <section class="empty-state">
+      <Icon kind="leaf" />
+      <h2>The guestbook is open to possibilities.</h2>
+      <p>No published messages yet. A little quiet is welcome here, too.</p>
+    </section>
+  )}
+</Layout>
+<script>
+  const form = document.querySelector<HTMLFormElement>('[data-draft-key]');
+  if (form) {
+    const name = form.querySelector<HTMLInputElement>('input')!;
+    const message = form.querySelector<HTMLTextAreaElement>('textarea')!;
+    const status = form.querySelector<HTMLElement>('[role=status]')!;
+    const key = form.dataset.draftKey!;
+    try {
+      const saved = JSON.parse(localStorage.getItem(key) || 'null');
+      if (
+        saved &&
+        typeof saved.name === 'string' &&
+        typeof saved.message === 'string'
+      ) {
+        name.value = saved.name.slice(0, 80);
+        message.value = saved.message.slice(0, 2000);
+        status.textContent =
+          'Your saved private draft is here. Not sent or published.';
+      }
+    } catch {
+      status.textContent =
+        'Storage is unavailable or the draft could not be read. Nothing has been sent.';
+    }
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      try {
+        localStorage.setItem(
+          key,
+          JSON.stringify({ name: name.value, message: message.value }),
+        );
+        status.textContent = 'Saved on this device. Not sent or published.';
+      } catch {
+        status.textContent =
+          'Could not save on this device. Your draft is still here on this page. Not sent or published.';
+      }
+    });
+    form
+      .querySelector<HTMLButtonElement>('[data-clear-draft]')!
+      .addEventListener('click', () => {
+        try {
+          localStorage.removeItem(key);
+          name.value = '';
+          message.value = '';
+          status.textContent =
+            'Private draft cleared. Nothing was sent or published.';
+        } catch {
+          status.textContent =
+            'Could not clear saved storage. Your draft is unchanged; nothing was sent or published.';
+        }
+        name.focus();
+      });
+    form.classList.add('is-ready');
+  }
+</script>

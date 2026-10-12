@@ -1,0 +1,52 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import Filters from '../../components/Filters.astro';
+const notes = (await getCollection('notes', (e) => !e.data.draft)).sort(
+  (a, b) => b.data.date.getTime() - a.data.date.getTime(),
+);
+const categories = [...new Set(notes.map((n) => n.data.category))];
+---
+
+<Layout
+  title="Notes"
+  description="Small observations, work in progress, and things worth keeping."
+>
+  <header class="page-heading">
+    <p class="eyebrow">Written down, kept around</p>
+    <h1>Notes, not manifestos.</h1>
+    <p>Small observations, work in progress, and things worth keeping.</p>
+  </header>
+  {notes.length ? (
+    <section>
+      <Filters categories={categories} noun="notes" />
+      <ul class="notes-list archive-list">
+        {notes.map((note) => (
+          <li class="note-row" data-category={note.data.category}>
+            <p class="meta">{note.data.category}</p>
+            <div class="note-line">
+              <a href={`/notes/${note.id}/`}>{note.data.title}</a>
+              <time datetime={note.data.date.toISOString()}>
+                {note.data.date.toLocaleDateString('en-US', {
+                  month: 'short',
+                  day: 'numeric',
+                  year: 'numeric',
+                  timeZone: 'UTC',
+                })}
+              </time>
+            </div>
+            <p>{note.data.description}</p>
+          </li>
+        ))}
+      </ul>
+    </section>
+  ) : (
+    <section class="empty-state">
+      <h2>No published notes yet.</h2>
+      <p>There are no notes to read here at the moment.</p>
+    </section>
+  )}
+  <div class="article-end">
+    <a href="/rss.xml">Follow new notes with RSS →</a>
+  </div>
+</Layout>

@@ -1,0 +1,49 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Icon from '../components/Icon.astro';
+import { now, updated } from '../data/now';
+---
+
+<Layout
+  title="Now"
+  description="What I am reading, making, and listening to lately."
+>
+  <header class="page-heading">
+    <p class="eyebrow">A snapshot of lately</p>
+    <h1>What’s on my mind.</h1>
+    <p>
+      Updated{' '}
+      <time datetime={updated}>
+        {new Date(updated + 'T12:00:00Z').toLocaleDateString('en-US', {
+          month: 'long',
+          day: 'numeric',
+          year: 'numeric',
+          timeZone: 'UTC',
+        })}
+      </time>
+      . A now page is a little window into the ordinary.
+    </p>
+  </header>
+  <div class="now-layout">
+    <section>
+      {now.map((item, i) => (
+        <article class="now-section">
+          <h2>
+            <Icon kind={['book', 'tool', 'music'][i]} />
+            {item.label}
+          </h2>
+          <h3>{item.title}</h3>
+          <p>{item.description}</p>
+        </article>
+      ))}
+    </section>
+    <aside class="aside-box">
+      <h2>Elsewhere here</h2>
+      <a href="/notes/">Recent notes →</a>
+      <a href="/projects/">On the workbench →</a>
+      <a href="/collections/">Things I’m keeping →</a>
+      <a href="/garden/">A garden of links →</a>
+      <p>Some things change quickly. Good pages make room for that.</p>
+    </aside>
+  </div>
+</Layout>

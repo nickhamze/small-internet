@@ -1,0 +1,13 @@
+---
+interface Props {
+  title: string;
+}
+const { title } = Astro.props;
+const words = title.trim().split(/\s+/);
+const finalWord = words.pop();
+---
+
+{words.length > 0 && `${words.join(' ')} `}
+<span class="link-ending">
+  {finalWord} <span aria-hidden="true">↗</span>
+</span>

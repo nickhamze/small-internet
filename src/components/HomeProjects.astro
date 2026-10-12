@@ -1,0 +1,36 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import ProjectDoodle from './ProjectDoodle.astro';
+interface Props {
+  projects: CollectionEntry<'projects'>[];
+}
+const { projects } = Astro.props;
+---
+
+<section class="home-projects paper-panel">
+  <div class="section-heading">
+    <h2>Selected projects</h2>
+    <a href="/projects/">View all →</a>
+  </div>
+  {projects.length ? (
+    <div class="cards">
+      {projects.map((project, i) => (
+        <article class="card">
+          <ProjectDoodle kind={i === 0 ? 'notebook' : 'books'} />
+          <div>
+            <h3>{project.data.title}</h3>
+            <p>{project.data.description}</p>
+            <a
+              href={`/projects/${project.id}/`}
+              aria-label={`View project: ${project.data.title}`}
+            >
+              View project →
+            </a>
+          </div>
+        </article>
+      ))}
+    </div>
+  ) : (
+    <p>The workbench is clear. Something will land here eventually.</p>
+  )}
+</section>

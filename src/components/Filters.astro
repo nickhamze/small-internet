@@ -1,0 +1,66 @@
+---
+interface Props {
+  categories: string[];
+  noun?: string;
+}
+const { categories, noun = 'items' } = Astro.props;
+---
+
+<div
+  class="filters js-only"
+  data-filter-group
+  role="group"
+  aria-label="Filter by category"
+>
+  <button class="chip" data-filter="All" aria-pressed="true">
+    All
+  </button>
+  {categories.map((category) => (
+    <button class="chip" data-filter={category} aria-pressed="false">
+      {category}
+    </button>
+  ))}
+  <span
+    class="filter-count"
+    role="status"
+    aria-live="polite"
+    data-noun={noun}
+  ></span>
+</div>
+<script>
+  document
+    .querySelectorAll<HTMLElement>('[data-filter-group]')
+    .forEach((group) => {
+      const container = group.parentElement!;
+      const items = Array.from(
+        container.querySelectorAll<HTMLElement>('[data-category]'),
+      );
+      const count = group.querySelector<HTMLElement>('.filter-count')!;
+      const update = (category: string) => {
+        let n = 0;
+        items.forEach((item) => {
+          item.hidden =
+            category !== 'All' && item.dataset.category !== category;
+          if (!item.hidden) n++;
+        });
+        group
+          .querySelectorAll<HTMLButtonElement>('[data-filter]')
+          .forEach((button) =>
+            button.setAttribute(
+              'aria-pressed',
+              String(button.dataset.filter === category),
+            ),
+          );
+        count.textContent = `${n} ${n === 1 ? count.dataset.noun!.replace(/s$/, '') : count.dataset.noun}`;
+      };
+      group
+        .querySelectorAll<HTMLButtonElement>('button')
+        .forEach((button) =>
+          button.addEventListener('click', () =>
+            update(button.dataset.filter!),
+          ),
+        );
+      update('All');
+      group.classList.add('is-ready');
+    });
+</script>

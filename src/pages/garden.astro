@@ -1,0 +1,39 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Filters from '../components/Filters.astro';
+import Icon from '../components/Icon.astro';
+import { garden } from '../data/garden';
+import ExternalTitle from '../components/ExternalTitle.astro';
+const categories = [...new Set(garden.map((n) => n.category))];
+---
+
+<Layout
+  title="Link garden"
+  description="An annotated garden of useful websites for reading, making, and finding your way."
+>
+  <header class="page-heading">
+    <p class="eyebrow">Good company on the web</p>
+    <h1>A garden of links.</h1>
+    <p>
+      A handful of places worth wandering into. Every link comes with a reason
+      to stay.
+    </p>
+  </header>
+  <section>
+    <Filters categories={categories} noun="links" />
+    <ul class="garden-list">
+      {garden.map((link, i) => (
+        <li class="garden-row" data-category={link.category}>
+          <Icon kind={i % 2 ? 'leaf' : 'book'} />
+          <div>
+            <a href={link.href}>
+              <ExternalTitle title={link.title} />
+            </a>
+            <p>{link.description}</p>
+          </div>
+          <span class="tag">{link.category}</span>
+        </li>
+      ))}
+    </ul>
+  </section>
+</Layout>
