@@ -11,4 +11,6 @@ export const site = {
   storageId: 'small-internet-robin',
   defaultLook: 'personal' as 'personal' | 'notebook' | 'garden',
   contactUrl: '',
+  remixUrl:
+    'https://my.spacefast.com/new?git=https%3A%2F%2Fgit.spacefast.com%2Fweirdpress%2Fsmall-internet',
 };

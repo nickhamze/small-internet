@@ -22,6 +22,10 @@ Public source: https://github.com/nickhamze/small-internet
 
 Theme demo: https://small-internet.space.fast/
 
+Remix on Spacefast: https://my.spacefast.com/new?git=https%3A%2F%2Fgit.spacefast.com%2Fweirdpress%2Fsmall-internet
+
+The visible demo button uses `remixUrl` in `src/data/site.ts`. Set it to your own destination or an empty string to hide it in your customized copy. It is an ordinary link, not a runtime integration.
+
 ## Start locally
 
 Use Node.js 22.12.0 or newer and npm. Download or clone the source, open its folder, then run:
@@ -105,7 +109,7 @@ Run `npm run build`, then upload the generated `dist/` directory to any static h
 
 ## Editable source package
 
-`node scripts/package.mjs` stages a clean editable copy in `output/clean-source/`. After reviewing the source you intend to share, `node scripts/package.mjs --zip` creates `output/small-internet-1.2.1.zip`. This requires a system `zip` utility. The allowlist includes source, public assets, lockfile, config, license notices, the asset/package/verification scripts, formatter settings, and CI workflow. It excludes dependencies, builds, environment files, deployment state, internal reports, mockups, screenshots, history, and local visitor data.
+`node scripts/package.mjs` stages a clean editable copy in `output/clean-source/`. After reviewing the source you intend to share, `node scripts/package.mjs --zip` creates `output/small-internet-1.2.2.zip`. This requires a system `zip` utility. The allowlist includes source, public assets, lockfile, config, license notices, the asset/package/verification scripts, formatter settings, and CI workflow. It excludes dependencies, builds, environment files, deployment state, internal reports, mockups, screenshots, history, and local visitor data.
 
 The package includes your content files and curated guestbook source. Review those before redistribution; the packaging script cannot decide whether your edits contain personal information. Verify your customized copy with the included commands and inspect the production build on your target screens.
 

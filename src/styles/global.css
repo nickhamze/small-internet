@@ -3554,3 +3554,33 @@ h3 {
     justify-self: start;
   }
 }
+
+/* Theme acquisition stays prominent without covering the artwork. */
+.theme-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px 24px;
+  margin: 0 0 24px 18px;
+}
+.spacefast-link {
+  font-family: 'Patrick Hand', cursive;
+  font-size: 20px;
+  text-underline-offset: 4px;
+}
+@media (max-width: 760px) {
+  .theme-actions {
+    margin: 0 0 20px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+  .remix-cta,
+  .spacefast-link {
+    text-align: center;
+    justify-content: center;
+  }
+  .spacefast-link {
+    padding: 8px;
+  }
+}

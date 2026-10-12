@@ -50,9 +50,16 @@ const projects = [
     </div>
     <Oddball />
   </section>
-  <a class="button spacefast-cta" href="https://spacefast.com/">
-    Meet Spacefast ↗
-  </a>
+  <div class="theme-actions">
+    {site.remixUrl && (
+      <a class="button remix-cta" href={site.remixUrl}>
+        Remix this theme ↗
+      </a>
+    )}
+    <a class="spacefast-link" href="https://spacefast.com/">
+      Meet Spacefast ↗
+    </a>
+  </div>
   <p class="current-strip">
     <span>Currently:</span> {site.currently}. <span aria-hidden="true">♡</span>
   </p>
