@@ -2,6 +2,8 @@
 
 ![Small Internet’s lavender personal homepage with a coffee-drinking computer](preview.png)
 
+[Try the live demo](https://small-internet.space.fast/) · [Use this GitHub template](https://github.com/nickhamze/small-internet/generate)
+
 A free Astro theme for a personal corner of the web: notes, projects, favorite things, and good links. Big comic headings, handwritten details, and a friendly CRT character keep it a little odd. Your writing stays in Markdown; the finished website is static HTML.
 
 Three looks are included, with distinct compositions and artwork:
